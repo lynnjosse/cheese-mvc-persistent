@@ -3,6 +3,7 @@ package org.launchcode.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -24,7 +25,12 @@ public class Cheese {
     @Size(min=1, message = "Description must not be empty")
     private String description;
 
-    private CheeseType type;
+    public Category getCategory() {
+        return category;
+    }
+
+    @ManyToOne
+    private Category category;
 
     public Cheese(String name, String description) {
         this.name = name;
@@ -37,9 +43,7 @@ public class Cheese {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public void setName(String name) {
         this.name = name;
@@ -53,11 +57,5 @@ public class Cheese {
         this.description = description;
     }
 
-    public CheeseType getType() {
-        return type;
-    }
-
-    public void setType(CheeseType type) {
-        this.type = type;
-    }
+    public void setCategory(Category category) { this.category = category; }
 }
